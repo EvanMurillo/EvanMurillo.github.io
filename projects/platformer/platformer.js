@@ -65,7 +65,7 @@ createPlatform(400,320,50,20);
 
     createCannon("top",200,700);
     createCannon("right",750,600);
-    createCannon("bottom",500,500);
+    createCannon("left",250,1000);
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
     /////////////////////////////////////////////////

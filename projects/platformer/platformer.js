@@ -40,9 +40,12 @@ $(function () {
     // example usage: createPlatform(x,y,width,height)
 
 createPlatform(50,610,150,20);
-createPlatform(500,570,100,20);
-createPlatform(800,450,100,20);
-createPlatform(800,310,100,20);
+createPlatform(500,570,50,20);
+createPlatform(770,450,50,20);
+createPlatform(600,320,50,20);
+createPlatform(90,320,50,20);
+createPlatform(520,320,50,20);
+createPlatform(400,320,50,20);
     
     // TODO 2
     // Create collectables
@@ -51,8 +54,8 @@ createPlatform(800,310,100,20);
     // example usage: createCollectable(type, x, y, gravity, bounce)
 
     createCollectable("database",100,580,);
-
-
+    createCollectable("database",800,100);
+    createCollectable("database",600,100,);
     
     // TODO 3
     // Create cannons
@@ -61,8 +64,8 @@ createPlatform(800,310,100,20);
     // example usage: createCannon(side, position, delay, width, height)
 
     createCannon("top",200,700);
-    createCannon("right",750,700);
-    
+    createCannon("right",750,600);
+    createCannon("bottom",500,500);
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
     /////////////////////////////////////////////////

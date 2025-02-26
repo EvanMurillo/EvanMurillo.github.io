@@ -1,0 +1,8 @@
+body {
+    background: url("../img/cloud.jpg") ;
+    background-color: #f1e5e5;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

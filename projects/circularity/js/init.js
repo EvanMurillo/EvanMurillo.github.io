@@ -68,8 +68,8 @@ var init = function (window) {
 
       // TODO 9 : Iterate over the array
       for (var i = 0; i < circles.length; i++) {
-        physikz.updatePosition(circles[i]);
-        game.checkCirclePosition(circles[i]);
+        physikz.updatePosition(circles[i]);// iterates all teh circles and moves them
+        game.checkCirclePosition(circles[i]); //check if the position is offo teh screen 
       }
     }
 

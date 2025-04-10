@@ -18,7 +18,7 @@ var runLevels = function (window) {
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
-    function createObstacles(x, y, hitSize, damage, image) {
+    function createObstacles(x, y, hitSize, damage, image, offset, offsetY) {
       var hitZoneSize = hitSize; // define the size of hitzone and assign it to a  variable
       var damageFromObstacle = damage; // defines the amount of damage obstacle causes and assigns to variable
       var obstacleHitZone = game.createObstacle( hitZoneSize, damageFromObstacle ); // creates the obstacle hitzone using the size and damage as parameters  and assigns it to a variable
@@ -27,16 +27,16 @@ var runLevels = function (window) {
       game.addGameItem(obstacleHitZone); // adds thes obstacle hitzone to the game
       var obstacleImage = draw.bitmap(image); // draws the image bitmap and sote it in obstaclesimage
       obstacleHitZone.addChild(obstacleImage); // attaches the image to the obstacle hitzone
-      obstacleImage.x = -80; //position the image on the hitzone by moving it left 25 pixels
-      obstacleImage.y = -100; //position the image on the hitzones y value by moving it up 25 pixels
+      obstacleImage.x = offset; //position the image on the hitzone by moving it left 25 pixels
+      obstacleImage.y = offsetY; //position the image on the hitzones y value by moving it up 25 pixels
       obstacleHitZone.rotationalVelocity = 0;
     }
 
-    function createEnemy(x, y, speed, health, image) {
+    function createEnemy(x, y, speed, health, image, offset, offsetY) {
       var enemy = game.createGameItem("enemy", 25); //  creates enemy game item and adds it to the game
       var enemyImage = draw.bitmap(image); // creates a red sqaure and sotres it in the var redSquare
-      enemyImage.x = -100; // offsets the image from the hitzone by -25
-      enemyImage.y = -100; // offsets the image from the hitzone by -25
+      enemyImage.x = offset; // offsets the image from the hitzone by -25
+      enemyImage.y = offsetY; // offsets the image from the hitzone by -25
       enemy.addChild(enemyImage); // add red square as a child to our enemy variable
       enemy.x = x; // x pos of enemy
       enemy.y = y; // y pos of enemy
@@ -57,8 +57,8 @@ var runLevels = function (window) {
     function createReward(x, y, speed, health, image) {
       var reward = game.createGameItem("reward", 25); //  creates reward game item and adds it to the game
       var rewardImage = draw.bitmap(image); // creates a blue sqaure and sotres it in the var blueSquare
-      image.x = -55; // offsets the image from the hitzone by -25
-      image.y = -60; // offsets the image from the hitzone by -25
+      rewardImage.x = -55; // offsets the image from the hitzone by -25
+      rewardImage.y = -60; // offsets the image from the hitzone by -25
       reward.addChild(rewardImage); // add blue square as a child to our reward variable
       reward.x = x; // x pos of reward
       reward.y = y; // y pos of reward
@@ -72,17 +72,17 @@ var runLevels = function (window) {
       };
     }
 
-    function createLevel(x, y, speed) {
+    function createLevel(x, y, speed, image) {
       var level = game.createGameItem("level", 25); //  creates reward game item and adds it to the game
-      var yellowSquare = draw.rect(50, 50, "yellow"); // creates a yellow sqaure and sotres it in the var yellowSquare
-      yellowSquare.x = -25; // offsets the image from the hitzone by -25
-      yellowSquare.y = -25; // offsets the image from the hitzone by -25
-      level.addChild(yellowSquare); // add yellow square as a child to our level variable
+      var levelImage = draw.bitmap(image); // creates a yellow sqaure and sotres it in the var yellowSquare
+      levelImage.x = -100; // offsets the image from the hitzone by -25
+      levelImage.y = -100; // offsets the image from the hitzone by -25
+      level.addChild(levelImage); // add yellow square as a child to our level variable
       level.x = x; // x pos of level
       level.y = y; // y pos of level
       game.addGameItem(level); // add level to the game
-      level.velocityX -= speed; // controlling how fast the menmy moves on x axis
-      level.rotationalVelocity = 10; // sets the roation velocity of the level
+      level.velocityX -= speed; // controlling how fast the level moves on x axis
+      level.rotationalVelocity = 0; // sets the roation velocity of the level
       level.onPlayerCollision = function () {
         level.shrink();
         startLevel();
@@ -99,33 +99,21 @@ var runLevels = function (window) {
 
         if (element.type === "sawblade") {
           //checks the type key:value of the gameItems objects to determine which objects to manifest
-          createObstacles(
-            element.x,
-            element.y,
-            element.hitSize,
-            element.damage,
-            element.image
-          ); // if the condition is true it wil call the relevant function
+          createObstacles( element.x, element.y,element.hitSize,element.damage,element.image, element.offset, element.offsetY); // if the condition is true it wil call the relevant function
         }
         if (element.type === "enemy") {
           //checks the type key:value of the gameItems objects to determine which objects to manifest
-          createEnemy(
-            element.x,
-            element.y,
-            element.speed,
-            element.health,
-            element.image
-          ); // if the condition is true it wil call the relevant function
+          createEnemy(element.x,element.y, element.speed, element.health, element.image,element.offset, element.offsetY); // if the condition is true it wil call the relevant function
         }
 
         if (element.type === "reward") {
           //checks the type key:value of the gameItems objects to determine which objects to manifest
-          createReward(element.x, element.y, element.speed, element.health); // if the condition is true it wil call the relevant function
+          createReward(element.x, element.y, element.speed, element.health,element.image); // if the condition is true it wil call the relevant function
         }
 
         if (element.type === "level") {
           //checks the type key:value of the gameItems objects to determine which objects to manifest
-          createLevel(element.x, element.y, element.speed); // if the condition is true it wil call the relevant function
+          createLevel(element.x, element.y, element.speed, element.image); // if the condition is true it wil call the relevant function
         }
       }
 
